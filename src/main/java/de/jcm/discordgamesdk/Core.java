@@ -365,6 +365,14 @@ public class Core implements AutoCloseable
 		init(f);
 	}
 
+	public static void initLocally(File discordSdkFile, File jniFile) {
+		String osName = System.getProperty("os.name").toLowerCase(Locale.ROOT);
+		if(osName.contains("windows")) System.load(discordSdkFile.getAbsolutePath());
+
+		System.load(jniFile.getAbsolutePath());
+		Core.initDiscordNative(discordSdkFile.getAbsolutePath());
+	}
+
 	/**
 	 * Loads Discord's SDK library.
 	 * <p>
